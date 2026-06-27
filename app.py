@@ -34,7 +34,7 @@ from pages import page_eksplorasi, page_evaluasi, page_simulasi
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="Gold Safe Haven Analysis | CRISP-DM",
-    page_icon="🥇",
+    page_icon="🪙",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -60,8 +60,21 @@ def _render_sidebar() -> str:
     st.sidebar.markdown(
         """
         <div style="text-align:center; padding:16px 0 20px 0;">
-            <div style="font-size:2.8rem;">🥇</div>
-            <div style="font-size:1rem; font-weight:700; color:#FFD700; margin-top:6px;">
+            <svg viewBox="0 0 24 24" width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 12px auto; display: block;">
+              <!-- Main body of the gold bar -->
+              <path d="M4 18L7 6H17L20 18H4Z" fill="url(#goldBarGrad)" stroke="#d4af37" stroke-width="1.5"/>
+              <!-- Highlighting top surface -->
+              <path d="M7 6L8.5 12H15.5L17 6H7Z" fill="#ffffff" opacity="0.15"/>
+              <!-- Reflections and side lines -->
+              <path d="M4.5 16H19.5" stroke="#ffffff" stroke-width="1.2" opacity="0.2"/>
+              <defs>
+                <linearGradient id="goldBarGrad" x1="4" y1="6" x2="20" y2="18" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFE259"/>
+                  <stop offset="1" stop-color="#FFA751"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div style="font-size:1.15rem; font-weight:800; color:#FFD700; margin-top:6px; letter-spacing:0.02em;">
                 Gold Safe Haven
             </div>
             <div style="font-size:0.75rem; color:#8090b0; margin-top:2px;">

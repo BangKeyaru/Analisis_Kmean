@@ -46,6 +46,20 @@ def sidebar_csv_uploader() -> None:
     else:
         st.sidebar.warning("⚠️ Belum ada dataset")
 
+    # -- Link Panduan ke Kaggle --
+    st.sidebar.markdown(
+        """
+        <div style="margin-top: -6px; margin-bottom: 12px; text-align: center;">
+            <a href="https://www.kaggle.com/datasets/aminasalamt/gold-price-and-global-economic-indicators15-26" 
+               target="_blank" 
+               style="color: #ffd700 !important; font-size: 0.8rem; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                🔍 Cari Dataset di Kaggle ↗
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 # ---------------------------------------------------------------------------
 # Fungsi pembaca CSV (dengan cache per konten bytes)
@@ -96,10 +110,17 @@ def render_upload_prompt() -> None:
         """
         <div class="upload-banner">
             <h2>📂 Upload Dataset untuk Memulai</h2>
-            <p>
+            <p style="margin-bottom: 20px;">
                 Gunakan panel <b>Upload Dataset CSV</b> di sidebar kiri untuk
                 mengunggah file <code>Gold_vs_Economic_Factors_2015_2026.csv</code>.
             </p>
+            <div>
+                <a href="https://www.kaggle.com/datasets/aminasalamt/gold-price-and-global-economic-indicators15-26" 
+                   target="_blank" 
+                   style="background: linear-gradient(135deg, #ffd700 0%, #b89600 100%); color: #0b0c16 !important; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-block; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25); transition: transform 0.2s ease;">
+                    📥 Download Dataset dari Kaggle ↗
+                </a>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,

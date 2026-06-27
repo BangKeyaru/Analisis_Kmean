@@ -45,15 +45,32 @@ def _render_hero() -> None:
     """Menampilkan banner judul dan deskripsi singkat penelitian."""
     st.markdown(
         """
-        <div class="hero-banner">
-            <h1>🥇 Analisis Perilaku Emas Sebagai Aset Safe Haven</h1>
-            <p>
-                Implementasi riset <b>CRISP-DM</b> menggunakan
-                <b>K-Means Clustering (k=3)</b> untuk menganalisis perilaku harga emas
-                terhadap indikator ekonomi global: Indeks Dolar AS (DXY),
-                Harga Minyak Mentah, dan Tingkat Inflasi.
-                Data historis mencakup periode <b>2015–2026</b>.
-            </p>
+        <div class="hero-banner" style="display: flex; align-items: center; gap: 24px;">
+            <div style="flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Main body of the gold bar -->
+                  <path d="M4 18L7 6H17L20 18H4Z" fill="url(#goldBarGradHero)" stroke="#d4af37" stroke-width="1.5"/>
+                  <!-- Highlighting top surface -->
+                  <path d="M7 6L8.5 12H15.5L17 6H7Z" fill="#ffffff" opacity="0.15"/>
+                  <!-- Reflections and side lines -->
+                  <path d="M4.5 16H19.5" stroke="#ffffff" stroke-width="1.2" opacity="0.2"/>
+                  <defs>
+                    <linearGradient id="goldBarGradHero" x1="4" y1="6" x2="20" y2="18" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#FFE259"/>
+                      <stop offset="1" stop-color="#FFA751"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+            </div>
+            <div>
+                <h1 style="margin: 0 0 8px 0; font-size: 1.8rem; font-weight: 800;">Analisis Perilaku Emas Sebagai Aset Safe Haven</h1>
+                <p style="margin: 0; line-height: 1.6; font-size: 1.05rem;">
+                    Implementasi riset <b>CRISP-DM</b> menggunakan <b>K-Means Clustering (k=3)</b>
+                    untuk menganalisis perilaku harga emas terhadap indikator ekonomi global:
+                    Indeks Dolar AS (DXY), Harga Minyak Mentah, dan Tingkat Inflasi.
+                    Data historis mencakup periode <b>2015–2026</b>.
+                </p>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -64,7 +81,7 @@ def _render_metrics(df: pd.DataFrame) -> None:
     """Menampilkan 4 metric card ringkasan dataset."""
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("📅 Total Observasi",     f"{len(df):,}")
-    c2.metric("🥇 Rata-rata Harga Emas", f"${df['Gold_Price_XAU_USD'].mean():,.1f}")
+    c2.metric("🪙 Rata-rata Harga Emas", f"${df['Gold_Price_XAU_USD'].mean():,.1f}")
     c3.metric("💵 Rata-rata DXY",        f"{df['US_Dollar_Index_DXY'].mean():.2f}")
     c4.metric("🛢️ Rata-rata Minyak",     f"${df['Crude_Oil_Price'].mean():.2f}")
 
@@ -162,18 +179,18 @@ def _render_correlation_insights(df: pd.DataFrame) -> None:
 
     insights = [
         (
-            "🥇 Gold vs 💵 DXY",
+            "🪙 Gold vs 💵 DXY",
             f"Korelasi <b>{gold_dxy:+.3f}</b> → Korelasi negatif sangat kuat. "
             "Emas cenderung naik ketika Dolar AS melemah, dan sebaliknya.",
         ),
         (
-            "🥇 Gold vs 🛢️ Crude Oil",
+            "🪙 Gold vs 🛢️ Crude Oil",
             f"Korelasi <b>{gold_oil:+.3f}</b> → Korelasi positif sangat kuat. "
             "Harga emas dan minyak mentah bergerak searah, mencerminkan "
             "dinamika pasar komoditas global.",
         ),
         (
-            "🥇 Gold vs 📈 Inflation",
+            "🪙 Gold vs 📈 Inflation",
             f"Korelasi <b>{gold_infl:+.3f}</b> → Hampir tidak ada korelasi linear. "
             "Emas tidak selalu merespons perubahan inflasi secara langsung "
             "dalam jangka pendek.",

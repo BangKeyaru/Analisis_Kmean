@@ -69,7 +69,7 @@ def _render_form(scaler: StandardScaler, kmeans: KMeans) -> None:
         col1, col2 = st.columns(2)
 
         gold = col1.number_input(
-            "🥇 Harga Emas (XAU/USD)",
+            "🪙 Harga Emas (XAU/USD)",
             min_value=500.0, max_value=5000.0,
             value=2350.0, step=10.0,
             help="Harga emas spot dalam USD per troy ounce.",
