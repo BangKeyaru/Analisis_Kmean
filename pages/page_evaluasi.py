@@ -81,20 +81,20 @@ def _render_elbow_silhouette(
 
     fig, axes = plt.subplots(1, 2, figsize=(13, 4.5))
     for ax in axes:
-        ax.set_facecolor("#1a1a2e")
-    fig.patch.set_facecolor("#1a1a2e")
+        ax.set_facecolor("#1a1d3a")
+    fig.patch.set_facecolor("#121324")
 
     # -- Elbow (WCSS) --
-    axes[0].plot(k_range, wcss_list, marker="o", color="#FFD700",
+    axes[0].plot(k_range, wcss_list, marker="o", color="#ffd700",
                  linewidth=2.2, markersize=7, markerfacecolor="#ff9900")
     axes[0].axvline(x=3, color="#E84393", linestyle="--",
                     linewidth=1.5, alpha=0.8, label="k=3 (terpilih)")
     axes[0].set_title("Elbow Method – WCSS",
-                       color="#FFD700", fontsize=12, fontweight="bold")
-    axes[0].set_xlabel("Jumlah Cluster (k)", color="#b0b8cc")
-    axes[0].set_ylabel("Within-Cluster Sum of Squares", color="#b0b8cc")
-    axes[0].tick_params(colors="#e0e0e0")
-    axes[0].legend(facecolor="#252545", labelcolor="#e0e0e0")
+                       color="#ffd700", fontsize=12, fontweight="bold")
+    axes[0].set_xlabel("Jumlah Cluster (k)", color="#94a3b8")
+    axes[0].set_ylabel("Within-Cluster Sum of Squares", color="#94a3b8")
+    axes[0].tick_params(colors="#cbd5e1")
+    axes[0].legend(facecolor="#252545", labelcolor="#cbd5e1")
     axes[0].spines[:].set_color("#3a3a5a")
     axes[0].grid(axis="y", color="#2a2a4a", linestyle="--", alpha=0.5)
 
@@ -105,10 +105,10 @@ def _render_elbow_silhouette(
                     linewidth=1.5, alpha=0.8, label="k=3 (terpilih)")
     axes[1].set_title("Silhouette Score",
                        color="#00C9A7", fontsize=12, fontweight="bold")
-    axes[1].set_xlabel("Jumlah Cluster (k)", color="#b0b8cc")
-    axes[1].set_ylabel("Silhouette Score",   color="#b0b8cc")
-    axes[1].tick_params(colors="#e0e0e0")
-    axes[1].legend(facecolor="#252545", labelcolor="#e0e0e0")
+    axes[1].set_xlabel("Jumlah Cluster (k)", color="#94a3b8")
+    axes[1].set_ylabel("Silhouette Score",   color="#94a3b8")
+    axes[1].tick_params(colors="#cbd5e1")
+    axes[1].legend(facecolor="#252545", labelcolor="#cbd5e1")
     axes[1].spines[:].set_color("#3a3a5a")
     axes[1].grid(axis="y", color="#2a2a4a", linestyle="--", alpha=0.5)
 
@@ -132,8 +132,8 @@ def _render_pca_scatter(
     explained = pca.explained_variance_ratio_ * 100
 
     fig, ax = plt.subplots(figsize=(10, 6))
-    fig.patch.set_facecolor("#1a1a2e")
-    ax.set_facecolor("#1a1a2e")
+    fig.patch.set_facecolor("#121324")
+    ax.set_facecolor("#1a1d3a")
 
     for cid in sorted(df_result["Cluster"].unique()):
         mask = df_result["Cluster"] == cid
@@ -152,20 +152,20 @@ def _render_pca_scatter(
     ax.scatter(
         centers_pca[:, 0], centers_pca[:, 1],
         marker="X", s=220, c="white",
-        edgecolors="#FFD700", linewidths=1.5,
+        edgecolors="#ffd700", linewidths=1.5,
         zorder=5, label="Centroid",
     )
 
-    ax.set_xlabel(f"PC1 ({explained[0]:.1f}% Variance)", color="#b0b8cc", fontsize=10)
-    ax.set_ylabel(f"PC2 ({explained[1]:.1f}% Variance)", color="#b0b8cc", fontsize=10)
+    ax.set_xlabel(f"PC1 ({explained[0]:.1f}% Variance)", color="#94a3b8", fontsize=10)
+    ax.set_ylabel(f"PC2 ({explained[1]:.1f}% Variance)", color="#94a3b8", fontsize=10)
     ax.set_title(
         "Hasil K-Means Clustering (k=3) – Proyeksi PCA 2D",
-        color="#FFD700", fontsize=13, fontweight="bold",
+        color="#ffd700", fontsize=13, fontweight="bold",
     )
-    ax.tick_params(colors="#e0e0e0")
+    ax.tick_params(colors="#cbd5e1")
     ax.spines[:].set_color("#3a3a5a")
     ax.grid(color="#2a2a4a", linestyle="--", alpha=0.4)
-    ax.legend(facecolor="#252545", labelcolor="#e0e0e0",
+    ax.legend(facecolor="#252545", labelcolor="#cbd5e1",
                fontsize=8.5, loc="upper right")
 
     plt.tight_layout()

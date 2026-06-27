@@ -109,16 +109,16 @@ def _render_correlation_heatmap(df: pd.DataFrame) -> None:
     corr = df[FEATURES].corr()
 
     fig, ax = plt.subplots(figsize=(7, 5))
-    fig.patch.set_facecolor("#1a1a2e")
-    ax.set_facecolor("#1a1a2e")
+    fig.patch.set_facecolor("#121324")
+    ax.set_facecolor("#1a1d3a")
 
     sns.heatmap(
         corr,
         annot=True,
         fmt=".3f",
         cmap="YlOrBr",
-        linewidths=0.5,
-        linecolor="#2a2a4e",
+        linewidths=1,
+        linecolor="#121324",
         ax=ax,
         square=True,
         annot_kws={"size": 11, "weight": "bold"},
@@ -126,9 +126,9 @@ def _render_correlation_heatmap(df: pd.DataFrame) -> None:
     )
     ax.set_title(
         "Korelasi Antar Variabel Ekonomi (2015–2026)",
-        color="#FFD700", fontsize=13, fontweight="bold", pad=14,
+        color="#ffd700", fontsize=13, fontweight="bold", pad=16,
     )
-    ax.tick_params(colors="#e0e0e0", labelsize=9)
+    ax.tick_params(colors="#94a3b8", labelsize=9)
     plt.tight_layout()
     st.pyplot(fig, use_container_width=True)
     plt.close(fig)

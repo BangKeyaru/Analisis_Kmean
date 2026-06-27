@@ -108,95 +108,229 @@ CLUSTER_RECOMMENDATIONS = {
 }
 
 # ---------------------------------------------------------------------------
-# Custom CSS (dark-mode premium theme)
+# Custom CSS (premium modern UI, glassmorphism, smooth animations)
 # ---------------------------------------------------------------------------
 CUSTOM_CSS = """
 <style>
-/* ---- Google Font ---- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* ---- Google Font Import ---- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ---- Base Reset & Fonts ---- */
 html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    color: #e2e8f0;
 }
 
-/* ---- Sidebar ---- */
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-    border-right: 1px solid rgba(255,215,0,0.15);
+/* ---- Dark Mode Base Styling ---- */
+.stApp {
+    background: radial-gradient(circle at 50% 0%, #121324 0%, #0b0c16 100%);
 }
-[data-testid="stSidebar"] * { color: #e0e0e0 !important; }
-[data-testid="stSidebar"] .stRadio label { font-size: 0.95rem; padding: 6px 0; }
+
+/* ---- Sidebar Glassmorphism ---- */
+[data-testid="stSidebar"] {
+    background: rgba(15, 17, 36, 0.7) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(255, 215, 0, 0.08) !important;
+}
+[data-testid="stSidebar"] * {
+    color: #cbd5e1 !important;
+}
+[data-testid="stSidebar"] .stRadio label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 4px;
+}
+[data-testid="stSidebar"] .stRadio label:hover {
+    background: rgba(255, 215, 0, 0.06);
+    color: #ffd700 !important;
+}
 
 /* ---- Metric Cards ---- */
 [data-testid="stMetric"] {
-    background: linear-gradient(135deg, #1e1e3f 0%, #252545 100%);
-    border: 1px solid rgba(255,215,0,0.25);
-    border-radius: 12px;
-    padding: 16px !important;
+    background: rgba(26, 29, 58, 0.45) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
-[data-testid="stMetricValue"] { color: #FFD700 !important; font-weight: 700 !important; }
+[data-testid="stMetric"]:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 215, 0, 0.3) !important;
+}
+[data-testid="stMetricLabel"] {
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8 !important;
+}
+[data-testid="stMetricValue"] {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #ffd700 !important;
+    font-weight: 800 !important;
+    font-size: 1.8rem !important;
+}
 
 /* ---- Hero Banner ---- */
 .hero-banner {
-    background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
-    border: 1px solid rgba(255,215,0,0.3);
-    border-radius: 16px;
-    padding: 32px 36px;
-    margin-bottom: 24px;
+    background: linear-gradient(135deg, rgba(22, 33, 62, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 20px;
+    padding: 36px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
 }
-.hero-banner h1 { font-size: 2rem; font-weight: 700; color: #FFD700; margin: 0 0 8px 0; }
-.hero-banner p  { color: #b0b8cc; font-size: 1rem; margin: 0; line-height: 1.6; }
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.hero-banner h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffd700;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+}
+.hero-banner p {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    margin: 0;
+    line-height: 1.65;
+    max-width: 90%;
+}
 
 /* ---- Section Title ---- */
 .section-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #FFD700;
-    border-left: 4px solid #FFD700;
-    padding-left: 10px;
-    margin: 28px 0 14px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    border-left: 5px solid #ffd700;
+    padding-left: 14px;
+    margin: 36px 0 18px 0;
+    letter-spacing: -0.01em;
 }
 
 /* ---- Insight Box ---- */
 .insight-box {
-    background: rgba(255,215,0,0.06);
-    border: 1px solid rgba(255,215,0,0.25);
-    border-radius: 10px;
-    padding: 14px 18px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    color: #d0d8e8;
+    background: rgba(255, 215, 0, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.55;
+    transition: background 0.3s ease;
 }
-.insight-box b { color: #FFD700; }
+.insight-box:hover {
+    background: rgba(255, 215, 0, 0.05);
+}
+.insight-box b {
+    color: #ffd700;
+    font-weight: 600;
+}
 
 /* ---- Cluster Cards ---- */
 .cluster-card {
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin: 8px 0;
-    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 14px 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.cluster-card h4 { margin: 0 0 6px 0; font-size: 1rem; font-weight: 600; }
-.cluster-card p  { margin: 0; font-size: 0.88rem; color: #c8d0e0; line-height: 1.55; }
+.cluster-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.cluster-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.cluster-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
 
 /* ---- Prediction Result Box ---- */
 .pred-box {
-    border-radius: 14px;
-    padding: 24px 28px;
-    margin-top: 18px;
+    border-radius: 18px;
+    padding: 28px 32px;
+    margin-top: 24px;
     border: 2px solid;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
 }
 
 /* ---- Upload Area ---- */
 .upload-banner {
-    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
-    border: 2px dashed rgba(255,215,0,0.4);
-    border-radius: 16px;
-    padding: 40px 24px;
+    background: rgba(26, 29, 58, 0.3);
+    border: 2px dashed rgba(255, 215, 0, 0.25);
+    border-radius: 20px;
+    padding: 50px 30px;
     text-align: center;
-    margin: 24px 0;
+    margin: 32px 0;
+    transition: border-color 0.3s ease;
 }
-.upload-banner h2 { color: #FFD700; font-size: 1.4rem; margin: 0 0 8px 0; }
-.upload-banner p  { color: #8090b0; font-size: 0.9rem; margin: 0; }
+.upload-banner:hover {
+    border-color: rgba(255, 215, 0, 0.5);
+}
+.upload-banner h2 {
+    color: #ffd700;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+.upload-banner p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* ---- Custom Dataframes & Tables Styling ---- */
+.stDataFrame {
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ---- Buttons Customization ---- */
+.stButton>button {
+    background: linear-gradient(135deg, #ffd700 0%, #b89600 100%) !important;
+    color: #0b0c16 !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.stButton>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+}
+
+/* ---- Form Styling ---- */
+[data-testid="stForm"] {
+    background: rgba(26, 29, 58, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 28px !important;
+}
 </style>
 """
