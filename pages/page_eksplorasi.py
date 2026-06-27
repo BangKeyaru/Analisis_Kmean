@@ -75,7 +75,9 @@ def _render_data_preview(df: pd.DataFrame) -> None:
         '<p class="section-title">📋 Cuplikan Dataset (20 Baris Pertama)</p>',
         unsafe_allow_html=True,
     )
-    st.dataframe(df.head(20), use_container_width=True, height=300)
+    df_preview = df.head(20).copy()
+    df_preview.index = df_preview.index + 1
+    st.dataframe(df_preview, use_container_width=True, height=300)
 
 
 def _render_descriptive_stats(df: pd.DataFrame) -> None:
@@ -108,9 +110,18 @@ def _render_correlation_heatmap(df: pd.DataFrame) -> None:
     )
     corr = df[FEATURES].corr()
 
+    theme = st.session_state.get("theme", "dark")
+    is_dark = (theme == "dark")
+    
+    fig_bg = "#121324" if is_dark else "#f8fafc"
+    ax_bg = "#1a1d3a" if is_dark else "#ffffff"
+    text_color = "#ffd700" if is_dark else "#b89600"
+    tick_color = "#94a3b8" if is_dark else "#475569"
+    grid_line = "#121324" if is_dark else "#e2e8f0"
+
     fig, ax = plt.subplots(figsize=(7, 5))
-    fig.patch.set_facecolor("#121324")
-    ax.set_facecolor("#1a1d3a")
+    fig.patch.set_facecolor(fig_bg)
+    ax.set_facecolor(ax_bg)
 
     sns.heatmap(
         corr,
@@ -118,7 +129,7 @@ def _render_correlation_heatmap(df: pd.DataFrame) -> None:
         fmt=".3f",
         cmap="YlOrBr",
         linewidths=1,
-        linecolor="#121324",
+        linecolor=grid_line,
         ax=ax,
         square=True,
         annot_kws={"size": 11, "weight": "bold"},
@@ -126,9 +137,9 @@ def _render_correlation_heatmap(df: pd.DataFrame) -> None:
     )
     ax.set_title(
         "Korelasi Antar Variabel Ekonomi (2015–2026)",
-        color="#ffd700", fontsize=13, fontweight="bold", pad=16,
+        color=text_color, fontsize=13, fontweight="bold", pad=16,
     )
-    ax.tick_params(colors="#94a3b8", labelsize=9)
+    ax.tick_params(colors=tick_color, labelsize=9)
     plt.tight_layout()
     st.pyplot(fig, use_container_width=True)
     plt.close(fig)

@@ -18,7 +18,7 @@ import streamlit as st
 # ---------------------------------------------------------------------------
 # Import modul internal
 # ---------------------------------------------------------------------------
-from config import CUSTOM_CSS
+from config import get_css
 from utils.data_loader import (
     sidebar_csv_uploader,
     parse_csv,
@@ -39,8 +39,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Injeksi CSS premium
-st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+# CSS will be injected dynamically inside main() based on the selected theme
 
 
 # ---------------------------------------------------------------------------
@@ -88,6 +87,14 @@ def _render_sidebar() -> str:
     # -- Upload CSV --
     sidebar_csv_uploader()
 
+    # -- Tema --
+    st.sidebar.markdown("---")
+    theme_toggle = st.sidebar.toggle(
+        "☀️ Mode Terang (Light)",
+        value=st.session_state.get("theme", "dark") == "light",
+    )
+    st.session_state["theme"] = "light" if theme_toggle else "dark"
+
     # -- Info metodologi --
     st.sidebar.markdown(
         """
@@ -117,6 +124,10 @@ def main() -> None:
       4. Latih pipeline (cached) dan routing ke halaman yang sesuai
     """
     page_key = _render_sidebar()
+    
+    # Injeksi CSS secara dinamis berdasarkan state tema terpilih
+    theme = st.session_state.get("theme", "dark")
+    st.markdown(get_css(theme), unsafe_allow_html=True)
 
     # -- Cek apakah CSV sudah diupload --
     if "csv_bytes" not in st.session_state:

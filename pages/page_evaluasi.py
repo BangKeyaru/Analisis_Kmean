@@ -79,24 +79,36 @@ def _render_elbow_silhouette(
         unsafe_allow_html=True,
     )
 
+    theme = st.session_state.get("theme", "dark")
+    is_dark = (theme == "dark")
+    
+    fig_bg = "#121324" if is_dark else "#f8fafc"
+    ax_bg = "#1a1d3a" if is_dark else "#ffffff"
+    text_color = "#ffd700" if is_dark else "#b89600"
+    label_color = "#94a3b8" if is_dark else "#475569"
+    tick_color = "#cbd5e1" if is_dark else "#1e293b"
+    legend_bg = "#252545" if is_dark else "#f1f5f9"
+    spine_color = "#3a3a5a" if is_dark else "#cbd5e1"
+    grid_color = "#2a2a4a" if is_dark else "#e2e8f0"
+
     fig, axes = plt.subplots(1, 2, figsize=(13, 4.5))
     for ax in axes:
-        ax.set_facecolor("#1a1d3a")
-    fig.patch.set_facecolor("#121324")
+        ax.set_facecolor(ax_bg)
+    fig.patch.set_facecolor(fig_bg)
 
     # -- Elbow (WCSS) --
-    axes[0].plot(k_range, wcss_list, marker="o", color="#ffd700",
+    axes[0].plot(k_range, wcss_list, marker="o", color=text_color,
                  linewidth=2.2, markersize=7, markerfacecolor="#ff9900")
     axes[0].axvline(x=3, color="#E84393", linestyle="--",
                     linewidth=1.5, alpha=0.8, label="k=3 (terpilih)")
     axes[0].set_title("Elbow Method – WCSS",
-                       color="#ffd700", fontsize=12, fontweight="bold")
-    axes[0].set_xlabel("Jumlah Cluster (k)", color="#94a3b8")
-    axes[0].set_ylabel("Within-Cluster Sum of Squares", color="#94a3b8")
-    axes[0].tick_params(colors="#cbd5e1")
-    axes[0].legend(facecolor="#252545", labelcolor="#cbd5e1")
-    axes[0].spines[:].set_color("#3a3a5a")
-    axes[0].grid(axis="y", color="#2a2a4a", linestyle="--", alpha=0.5)
+                       color=text_color, fontsize=12, fontweight="bold")
+    axes[0].set_xlabel("Jumlah Cluster (k)", color=label_color)
+    axes[0].set_ylabel("Within-Cluster Sum of Squares", color=label_color)
+    axes[0].tick_params(colors=tick_color)
+    axes[0].legend(facecolor=legend_bg, labelcolor=tick_color)
+    axes[0].spines[:].set_color(spine_color)
+    axes[0].grid(axis="y", color=grid_color, linestyle="--", alpha=0.5)
 
     # -- Silhouette Score --
     axes[1].plot(k_range, sil_list, marker="s", color="#00C9A7",
@@ -105,12 +117,12 @@ def _render_elbow_silhouette(
                     linewidth=1.5, alpha=0.8, label="k=3 (terpilih)")
     axes[1].set_title("Silhouette Score",
                        color="#00C9A7", fontsize=12, fontweight="bold")
-    axes[1].set_xlabel("Jumlah Cluster (k)", color="#94a3b8")
-    axes[1].set_ylabel("Silhouette Score",   color="#94a3b8")
-    axes[1].tick_params(colors="#cbd5e1")
-    axes[1].legend(facecolor="#252545", labelcolor="#cbd5e1")
-    axes[1].spines[:].set_color("#3a3a5a")
-    axes[1].grid(axis="y", color="#2a2a4a", linestyle="--", alpha=0.5)
+    axes[1].set_xlabel("Jumlah Cluster (k)", color=label_color)
+    axes[1].set_ylabel("Silhouette Score",   color=label_color)
+    axes[1].tick_params(colors=tick_color)
+    axes[1].legend(facecolor=legend_bg, labelcolor=tick_color)
+    axes[1].spines[:].set_color(spine_color)
+    axes[1].grid(axis="y", color=grid_color, linestyle="--", alpha=0.5)
 
     plt.tight_layout()
     st.pyplot(fig, use_container_width=True)
@@ -131,9 +143,21 @@ def _render_pca_scatter(
 
     explained = pca.explained_variance_ratio_ * 100
 
+    theme = st.session_state.get("theme", "dark")
+    is_dark = (theme == "dark")
+    
+    fig_bg = "#121324" if is_dark else "#f8fafc"
+    ax_bg = "#1a1d3a" if is_dark else "#ffffff"
+    label_color = "#94a3b8" if is_dark else "#475569"
+    title_color = "#ffd700" if is_dark else "#b89600"
+    tick_color = "#cbd5e1" if is_dark else "#1e293b"
+    legend_bg = "#252545" if is_dark else "#f1f5f9"
+    spine_color = "#3a3a5a" if is_dark else "#cbd5e1"
+    grid_color = "#2a2a4a" if is_dark else "#e2e8f0"
+
     fig, ax = plt.subplots(figsize=(10, 6))
-    fig.patch.set_facecolor("#121324")
-    ax.set_facecolor("#1a1d3a")
+    fig.patch.set_facecolor(fig_bg)
+    ax.set_facecolor(ax_bg)
 
     for cid in sorted(df_result["Cluster"].unique()):
         mask = df_result["Cluster"] == cid
@@ -152,20 +176,20 @@ def _render_pca_scatter(
     ax.scatter(
         centers_pca[:, 0], centers_pca[:, 1],
         marker="X", s=220, c="white",
-        edgecolors="#ffd700", linewidths=1.5,
+        edgecolors=title_color, linewidths=1.5,
         zorder=5, label="Centroid",
     )
 
-    ax.set_xlabel(f"PC1 ({explained[0]:.1f}% Variance)", color="#94a3b8", fontsize=10)
-    ax.set_ylabel(f"PC2 ({explained[1]:.1f}% Variance)", color="#94a3b8", fontsize=10)
+    ax.set_xlabel(f"PC1 ({explained[0]:.1f}% Variance)", color=label_color, fontsize=10)
+    ax.set_ylabel(f"PC2 ({explained[1]:.1f}% Variance)", color=label_color, fontsize=10)
     ax.set_title(
         "Hasil K-Means Clustering (k=3) – Proyeksi PCA 2D",
-        color="#ffd700", fontsize=13, fontweight="bold",
+        color=title_color, fontsize=13, fontweight="bold",
     )
-    ax.tick_params(colors="#cbd5e1")
-    ax.spines[:].set_color("#3a3a5a")
-    ax.grid(color="#2a2a4a", linestyle="--", alpha=0.4)
-    ax.legend(facecolor="#252545", labelcolor="#cbd5e1",
+    ax.tick_params(colors=tick_color)
+    ax.spines[:].set_color(spine_color)
+    ax.grid(color=grid_color, linestyle="--", alpha=0.4)
+    ax.legend(facecolor=legend_bg, labelcolor=tick_color,
                fontsize=8.5, loc="upper right")
 
     plt.tight_layout()

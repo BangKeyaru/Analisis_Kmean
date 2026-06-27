@@ -155,12 +155,11 @@ def _render_prediction_result(cluster_pred: int) -> None:
     rec = CLUSTER_RECOMMENDATIONS[cluster_pred]
     st.markdown(
         f"""
-        <div class="pred-box"
-             style="background:{rec['bg']}; border-color:{rec['border']};">
-            <h3 style="color:{rec['text_color']}; margin:0 0 10px 0;">
+        <div class="pred-box pred-box-{cluster_pred}">
+            <h3 style="margin:0 0 10px 0;">
                 {rec['status']}
             </h3>
-            <p style="color:#d0d8e8; font-size:0.95rem; line-height:1.65; margin:0;">
+            <p style="font-size:0.95rem; line-height:1.65; margin:0;">
                 {rec['detail']}
             </p>
         </div>
