@@ -156,60 +156,119 @@ def get_css(theme: str = "dark") -> str:
     dataframe_border = "rgba(255, 255, 255, 0.05)" if is_dark else "rgba(0, 0, 0, 0.06)"
     
     pred_box_custom_styles = """
-    .pred-box-0 {
+    .stApp .pred-box-0 {
         background-color: #0d2a1a !important;
         border-color: #00C9A7 !important;
     }
-    .pred-box-0 h3 {
+    .stApp .pred-box-0 h3 {
         color: #00ffc8 !important;
     }
-    .pred-box-0 p, .pred-box-0 b {
+    .stApp .pred-box-0 p, .stApp .pred-box-0 b {
         color: #ffffff !important;
     }
 
-    .pred-box-1 {
+    .stApp .pred-box-1 {
         background-color: #2a2200 !important;
         border-color: #FFD700 !important;
     }
-    .pred-box-1 h3 {
+    .stApp .pred-box-1 h3 {
         color: #FFD700 !important;
     }
-    .pred-box-1 p, .pred-box-1 b {
+    .stApp .pred-box-1 p, .stApp .pred-box-1 b {
         color: #ffffff !important;
     }
 
-    .pred-box-2 {
+    .stApp .pred-box-2 {
         background-color: #2a0a18 !important;
         border-color: #E84393 !important;
     }
-    .pred-box-2 h3 {
+    .stApp .pred-box-2 h3 {
         color: #ff6b9d !important;
     }
-    .pred-box-2 p, .pred-box-2 b {
+    .stApp .pred-box-2 p, .stApp .pred-box-2 b {
         color: #ffffff !important;
     }
     """ if is_dark else """
-    .pred-box-0 {
+    .stApp .pred-box-0 {
         background-color: #d1e7dd !important;
         border-color: #badbcc !important;
     }
-    .pred-box-0 h3, .pred-box-0 p, .pred-box-0 b {
+    .stApp .pred-box-0 h3, .stApp .pred-box-0 p, .stApp .pred-box-0 b {
         color: #0f5132 !important;
     }
 
-    .pred-box-1 {
+    .stApp .pred-box-1 {
         background-color: #fff3cd !important;
         border-color: #ffecb5 !important;
     }
-    .pred-box-1 h3, .pred-box-1 p, .pred-box-1 b {
+    .stApp .pred-box-1 h3, .stApp .pred-box-1 p, .stApp .pred-box-1 b {
         color: #664d03 !important;
     }
 
-    .pred-box-2 {
+    .stApp .pred-box-2 {
         background-color: #f8d7da !important;
         border-color: #f5c2c7 !important;
     }
-    .pred-box-2 h3, .pred-box-2 p, .pred-box-2 b {
+    .stApp .pred-box-2 h3, .stApp .pred-box-2 p, .stApp .pred-box-2 b {
+        color: #842029 !important;
+    }
+    """
+
+    cluster_card_custom_styles = """
+    .stApp .cluster-card-0 {
+        background-color: #2a1a0e !important;
+        border-color: rgba(255, 215, 0, 0.25) !important;
+    }
+    .stApp .cluster-card-0 h4 {
+        color: #FFD700 !important;
+    }
+    .stApp .cluster-card-0 p {
+        color: #f1f5f9 !important;
+    }
+
+    .stApp .cluster-card-1 {
+        background-color: #0a2a1e !important;
+        border-color: rgba(0, 201, 167, 0.25) !important;
+    }
+    .stApp .cluster-card-1 h4 {
+        color: #00C9A7 !important;
+    }
+    .stApp .cluster-card-1 p {
+        color: #f1f5f9 !important;
+    }
+
+    .stApp .cluster-card-2 {
+        background-color: #1a0a1e !important;
+        border-color: rgba(232, 67, 147, 0.25) !important;
+    }
+    .stApp .cluster-card-2 h4 {
+        color: #E84393 !important;
+    }
+    .stApp .cluster-card-2 p {
+        color: #f1f5f9 !important;
+    }
+    """ if is_dark else """
+    .stApp .cluster-card-0 {
+        background-color: #fff3cd !important;
+        border-color: #ffecb5 !important;
+    }
+    .stApp .cluster-card-0 h4, .stApp .cluster-card-0 p {
+        color: #664d03 !important;
+    }
+
+    .stApp .cluster-card-1 {
+        background-color: #d1e7dd !important;
+        border-color: #badbcc !important;
+    }
+    .stApp .cluster-card-1 h4, .stApp .cluster-card-1 p {
+        color: #0f5132 !important;
+    }
+
+    .stApp .cluster-card-2 {
+        background-color: #f8d7da !important;
+        border-color: #f5c2c7 !important;
+    }
+    .stApp .cluster-card-2 h4, .stApp .cluster-card-2 p {
         color: #842029 !important;
     }
     """
@@ -389,6 +448,8 @@ html, body, [class*="css"] {{
     color: {cluster_card_text};
     line-height: 1.6;
 }}
+
+{cluster_card_custom_styles}
 
 /* ---- Prediction Result Box ---- */
 .pred-box {{

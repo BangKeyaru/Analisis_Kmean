@@ -242,8 +242,8 @@ def _render_cluster_cards() -> None:
     for cid, (bg, border, title, desc) in CLUSTER_DESCRIPTIONS.items():
         st.markdown(
             f"""
-            <div class="cluster-card" style="background:{bg}; border-color:{border}40;">
-                <h4 style="color:{border};">{CLUSTER_ICONS[cid]} {title}</h4>
+            <div class="cluster-card cluster-card-{cid}">
+                <h4>{CLUSTER_ICONS[cid]} {title}</h4>
                 <p>{desc}</p>
             </div>
             """,
